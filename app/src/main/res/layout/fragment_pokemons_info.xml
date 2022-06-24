@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.lgvh.gf.pokeapp.util.LoadStatus"/>
+        <variable
+            name="viewModel"
+            type="com.lgvh.gf.pokeapp.home.viewmodel.PokemonInfoViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/title"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{@string/info_title(viewModel.namePokemon)}"
+            tools:text="@string/info_title"
+            style="@style/title_style" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            android:textSize="@dimen/info_text"
+            android:layout_margin="@dimen/standard_margin"
+            android:text="@{@string/info_happiness(String.valueOf(viewModel.infoPokemon.name))}"
+            android:visibility="@{viewModel.status == LoadStatus.LOADING ? View.GONE : View.VISIBLE}"
+            tools:text="@string/info_name"/>
+        <TextView
+            android:id="@+id/happiness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            android:textSize="@dimen/info_text"
+            android:layout_margin="@dimen/standard_margin"
+            android:text="@{@string/info_happiness(String.valueOf(viewModel.infoPokemon.base_happiness))}"
+            android:visibility="@{viewModel.status == LoadStatus.LOADING ? View.GONE : View.VISIBLE}"
+            tools:text="@string/info_happiness"/>
+        <TextView
+            android:id="@+id/capture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/happiness"
+            android:textSize="@dimen/info_text"
+            android:layout_margin="@dimen/standard_margin"
+            android:text="@{@string/info_capture(String.valueOf(viewModel.infoPokemon.capture_rate))}"
+            android:visibility="@{viewModel.status == LoadStatus.LOADING ? View.GONE : View.VISIBLE}"
+            tools:text="@string/info_capture"/>
+        <TextView
+            android:id="@+id/color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/capture"
+            android:textSize="@dimen/info_text"
+            android:layout_margin="@dimen/standard_margin"
+            android:text="@{@string/info_color(viewModel.infoPokemon.color.name)}"
+            android:visibility="@{viewModel.status == LoadStatus.LOADING ? View.GONE : View.VISIBLE}"
+            tools:text="@string/info_color"/>
+        <TextView
+            android:id="@+id/egg_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/color"
+            android:textSize="@dimen/info_text"
+            android:layout_margin="@dimen/standard_margin"
+            android:text="@{@string/info_eggGroup(viewModel.eggsString)}"
+            android:visibility="@{viewModel.status == LoadStatus.LOADING ? View.GONE : View.VISIBLE}"
+            tools:text="@string/info_eggGroup"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/lineButtons"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9"/>
+
+        <Button
+            android:id="@+id/line_evolve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/info_line_evolve"
+            android:onClick="@{() -> viewModel.openEvolve()}"
+            app:layout_constraintBottom_toTopOf="@+id/lineButtons"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
+            android:visibility="@{viewModel.status == LoadStatus.LOADING ? View.GONE : View.VISIBLE}"/>
+
+        <Button
+            android:id="@+id/abilities"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/lineButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:onClick="@{() -> viewModel.openAbilities()}"
+            android:visibility="@{viewModel.status == LoadStatus.LOADING ? View.GONE : View.VISIBLE}"
+            android:text="@string/info_line_abilities"/>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        android:visibility="@{viewModel.status == LoadStatus.LOADING ? View.VISIBLE : View.GONE}"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
+    <TextView
+        android:id="@+id/textLoading"
+        app:layout_constraintTop_toBottomOf="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/loading_padding"
+        android:layout_margin="@dimen/loading_margin"
+        android:textSize="@dimen/loading_size"
+        android:gravity="center"
+        android:visibility="@{viewModel.status == LoadStatus.LOADING ? View.VISIBLE : View.GONE}"
+        android:text="@{@string/loading_info(viewModel.namePokemon)}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

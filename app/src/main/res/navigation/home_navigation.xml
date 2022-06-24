@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/pokemonsFragment">
+
+    <fragment
+        android:id="@+id/pokemonsFragment"
+        android:name="com.lgvh.gf.pokeapp.home.ui.PokemonsFragment"
+        android:label="fragment_pokemons"
+        tools:layout="@layout/fragment_pokemons" >
+        <action
+            android:id="@+id/detailPokemon"
+            app:destination="@id/pokemonsInfoFragment" />
+        <argument
+            android:name="nameSelected"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonsInfoFragment"
+        android:name="com.lgvh.gf.pokeapp.home.ui.PokemonsInfoFragment"
+        android:label="fragment_pokemons_info"
+        tools:layout="@layout/fragment_pokemons_info">
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_pokemonsInfoFragment_to_pokemonsFragment"
+            app:destination="@id/pokemonsFragment" />
+        <action
+            android:id="@+id/action_pokemonsInfoFragment_to_evolutionaryLineFragment"
+            app:destination="@id/evolutionaryLineFragment" />
+        <action
+            android:id="@+id/action_pokemonsInfoFragment_to_abilitiyFragment"
+            app:destination="@id/abilitiyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/evolutionaryLineFragment"
+        android:name="com.lgvh.gf.pokeapp.home.ui.EvolutionaryLineFragment"
+        android:label="fragment_evolutionary_line"
+        tools:layout="@layout/fragment_evolutionary_line" >
+        <action
+            android:id="@+id/action_evolutionaryLineFragment_to_pokemonsInfoFragment"
+            app:destination="@id/pokemonsInfoFragment" />
+        <action
+            android:id="@+id/backToHome"
+            app:destination="@id/pokemonsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/pokemonsFragment"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/abilitiyFragment"
+        android:name="com.lgvh.gf.pokeapp.home.ui.AbilitiyFragment"
+        android:label="fragment_abilitiy"
+        tools:layout="@layout/fragment_abilitiy" >
+        <action
+            android:id="@+id/action_abilitiyFragment_to_pokemonsInfoFragment"
+            app:destination="@id/pokemonsInfoFragment" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+</navigation>

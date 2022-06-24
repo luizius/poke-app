@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">PokeApp</string>
+    <string name="item_pokemon_name">charizard</string>
+
+    <string name="info_title">Inforamción del Pokémon %s</string>
+    <string name="info_name">Nombre: %s</string>
+    <string name="info_happiness">Felicidad %s</string>
+    <string name="info_color">Color: %s</string>
+    <string name="info_capture">Ratio de captura: %s</string>
+    <string name="info_eggGroup">Grupo de huevo: %s</string>
+    <string name="info_line_evolve">Linea evolutiva</string>
+    <string name="info_line_abilities">Habilidades</string>
+    <string name="evolve_title">Linea evolutiva</string>
+    <string name="abilites_title">Habilidades de %s</string>
+    <string name="cargando_pokemons">Cargando pokémons</string>
+    <string name="loading_abilitys">Cargando habilidades de %s</string>
+    <string name="loading_info">Cargando Informacion de %s</string>
+    <string name="loading_evolve">Cargando Linea evolutiva de %s</string>
+    <string name="loading_ability">Cargando Habilidades de %s</string>
+
+
+</resources>
